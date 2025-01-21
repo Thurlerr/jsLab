@@ -16,7 +16,13 @@
         <button type="button" id="ocorrenciaBtn">Maior Ocorrência</button>
     </div>
     <div>
+        <label for="searchBox"></label>
+        <input type="text" id="searchBox">
         <button type="button" id="searchBtn">Procurar</button>
+    </div>
+    <div>
+        <label for="replaceBox"></label>
+        <input type="text" id="replaceBox">
         <button type="button" id="replaceBtn">Substituir</button>
     </div>
 
@@ -135,7 +141,7 @@
 
             // FIM TABELA *********************************
         })
-       //Q4
+    //Q4
 
        let ocorrenciaBtn = document.querySelector("#ocorrenciaBtn") //criar esse botao lá no html
     
@@ -172,7 +178,35 @@
         corpo.appendChild(retornoTela) //insere o p criado no DOM no local selecionado
         })
 
+        //Q5 5. Faça um programa que implemente a funcionalidade substituir em textos, ou seja, terá um campo 
+        //"procurar" e um campo "substituir". Ao executar, seu programa deverá procurar as ocorrências no texto 
+        //do valor digitado em "procurar" e trocar pelo valor digitado em "substituir".
+
+        //procurar
+        const searchBtn = document.querySelector('#searchBtn')
+
+        searchBtn.addEventListener('click', () => {
+
+        let textoPrincipal = document.querySelector('#caixa').value
+        let procurarNoTexto = document.querySelector('#searchBox').value
+
+        textoPrincipal = textoPrincipal.split(" ")
+        const textoPrincipal2 = textoPrincipal.map(palavra, () => {
+        if(palavra == procurarNoTexto) return `<span style="background-color: yellow">${palavra}</span>`
+        }).join(",")
+        })
+
+        //substituir
+        const replaceBtn = document.querySelector('#replaceBtn')        
     
+        replaceBtn.addEventListener('click', () => {
+        //manipular a DOM pra enfiar o novo conteudo de textoPrincipal via innerhtml
+        const retornoTela = document.createElement('p') //cria p na memoria
+        const corpo = document.querySelector('body') //seleciona um lugar no DOM
+        retornoTela = textoPrincipal.innerHTML //coloca conteudo no p
+        retornoTela.appendChild(corpo)
+        })
+
     </script>
 </body>
 </html>
