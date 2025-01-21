@@ -14,6 +14,7 @@
         <button type="button" id="vogBtn">Marcar Vogais</button>
         <button type="button" id="contadorBtn">Contador de Palavras</button>
         <button type="button" id="ocorrenciaBtn">Maior Ocorrência</button>
+        <button type="button" id="dataBtn">Dias de vida</button>
     </div>
     <div>
         <label for="searchBox"></label>
@@ -178,44 +179,72 @@
         corpo.appendChild(retornoTela) //insere o p criado no DOM no local selecionado
         })
 
-        //Q5 5. Faça um programa que implemente a funcionalidade substituir em textos, ou seja, terá um campo 
-        //"procurar" e um campo "substituir". Ao executar, seu programa deverá procurar as ocorrências no texto 
-        //do valor digitado em "procurar" e trocar pelo valor digitado em "substituir".
+        //Q5
 
         //procurar
         const searchBtn = document.querySelector('#searchBtn')
         let textoPrincipalAlterado
+        let hook
         
         searchBtn.addEventListener('click', () => {
         let textoPrincipal = document.querySelector('#caixa').value
         let procurarNoTexto = document.querySelector('#searchBox').value
 
         textoPrincipal = textoPrincipal.split(" ")
-
-        textoPrincipalAlterado = textoPrincipal.map((palavra) => { //map só recebe um parâmetro: a função callback
-        if(palavra == procurarNoTexto) return `<span style="background-color: yellow">${palavra}</span>`
+        let textoPrincipalAlteradoF1
+        textoPrincipalAlteradoF1 = textoPrincipal.map((palavra) => { //map só recebe um parâmetro: a função callback
+        if(palavra == procurarNoTexto) {
+        hook = palavra
+        return `<span style="background-color: yellow">${palavra}</span>`
+        }
         else return palavra
         }).join(" ")
         
         let retornoTela = document.createElement('p') //cria p na memoria
         const corpo = document.querySelector('body') //seleciona um lugar no DOM
-        retornoTela.innerHTML = textoPrincipalAlterado //coloca conteudo no p
+        retornoTela.innerHTML = textoPrincipalAlteradoF1 //coloca conteudo no p
         corpo.appendChild(retornoTela)
-
-        console.log(textoPrincipalAlterado)
         })
 
         //substituir
         const replaceBtn = document.querySelector('#replaceBtn')        
-    
+
         replaceBtn.addEventListener('click', () => {
         let replace = document.querySelector('#replaceBox').value
-        //concatenar a palavra substituida com o restante da caixa entrada (reescrever essa linha tirando esse comentário)
-        //nao da pra dar highlight direto em textarea ou input porque só aceita texto puro. tem que enfiar em uma div ou p
+        let textoPrincipal = document.querySelector('#caixa').value
+        let textoPrincipalAlteradoF2
+        console.log(`debug hook dentro do escopo: ${hook}`)
+        console.log(`debug replace dentro do escopo: ${replace}`)
+        //texto principalalterado está com a tag de highlight, remover antes de aplicar lógica de replace
+        textoPrincipalAlteradoF2 = textoPrincipal.split(" ")
+
+        textoPrincipalAlteradoF2 = textoPrincipalAlteradoF2.map((palavra) => {
+            if (palavra == hook){ 
+                return palavra = replace
+            }
+            else return palavra
+        }).join(" ")
+
         let retornoTela = document.createElement('p') //cria p na memoria
         const corpo = document.querySelector('body') //seleciona um lugar no DOM
-        retornoTela.innerHTML = replace //tem que colocar o valor que ta atualmente dentro do input do substituir
-        corpo.appendChild(retornoTela)
+        retornoTela.innerHTML = textoPrincipalAlteradoF2 //coloca a string como valor de p 
+        corpo.appendChild(retornoTela) //localdadom.appendChild(elemento DOM a ser adicionado)
+        })
+
+
+        //Q6 6. Faça um programa que leia uma data de nascimento e retorne quantos dias de vida a pessoa tem.
+
+        let containerData = document.querySelector('#caixa').value
+        let dataBtn = document.querySelector('#dataBtn')
+        let dataArray = containerData
+        dataArray.split(" ")
+
+        dataBtn = addEventListener('click', () => {
+            console.log(typeof dataArray)
+
+            dataArray.forEach((numero) => 
+            console.log(`debug pra ver se aparecer / foreach : ${numero}`)
+        )
         })
 
     </script>
