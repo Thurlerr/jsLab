@@ -184,27 +184,38 @@
 
         //procurar
         const searchBtn = document.querySelector('#searchBtn')
-
+        let textoPrincipalAlterado
+        
         searchBtn.addEventListener('click', () => {
-
         let textoPrincipal = document.querySelector('#caixa').value
         let procurarNoTexto = document.querySelector('#searchBox').value
 
         textoPrincipal = textoPrincipal.split(" ")
-        const textoPrincipal2 = textoPrincipal.map(palavra, () => {
+
+        textoPrincipalAlterado = textoPrincipal.map((palavra) => { //map só recebe um parâmetro: a função callback
         if(palavra == procurarNoTexto) return `<span style="background-color: yellow">${palavra}</span>`
-        }).join(",")
+        else return palavra
+        }).join(" ")
+        
+        let retornoTela = document.createElement('p') //cria p na memoria
+        const corpo = document.querySelector('body') //seleciona um lugar no DOM
+        retornoTela.innerHTML = textoPrincipalAlterado //coloca conteudo no p
+        corpo.appendChild(retornoTela)
+
+        console.log(textoPrincipalAlterado)
         })
 
         //substituir
         const replaceBtn = document.querySelector('#replaceBtn')        
     
         replaceBtn.addEventListener('click', () => {
-        //manipular a DOM pra enfiar o novo conteudo de textoPrincipal via innerhtml
-        const retornoTela = document.createElement('p') //cria p na memoria
+        let replace = document.querySelector('#replaceBox').value
+        //concatenar a palavra substituida com o restante da caixa entrada (reescrever essa linha tirando esse comentário)
+        //nao da pra dar highlight direto em textarea ou input porque só aceita texto puro. tem que enfiar em uma div ou p
+        let retornoTela = document.createElement('p') //cria p na memoria
         const corpo = document.querySelector('body') //seleciona um lugar no DOM
-        retornoTela = textoPrincipal.innerHTML //coloca conteudo no p
-        retornoTela.appendChild(corpo)
+        retornoTela.innerHTML = replace //tem que colocar o valor que ta atualmente dentro do input do substituir
+        corpo.appendChild(retornoTela)
         })
 
     </script>
