@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
+<body style="background-color: rgba(0, 0, 0, 0.801);">
     <div>
         <p>Escreva uma frase</p>
         <label for="caixa">Entrada:<br></label>
@@ -15,6 +15,8 @@
         <button type="button" id="contadorBtn">Contador de Palavras</button>
         <button type="button" id="ocorrenciaBtn">Maior Ocorrência</button>
         <button type="button" id="dataBtn">Dias de vida</button>
+        <button type="button" id="dataExtBtn">Data por extenso</button>
+        <button type="button" id="difDataBtn">Diferença entre datas</button>
     </div>
     <div>
         <label for="searchBox"></label>
@@ -234,18 +236,86 @@
 
         //Q6 6. Faça um programa que leia uma data de nascimento e retorne quantos dias de vida a pessoa tem.
 
-        let containerData = document.querySelector('#caixa').value
+       
         let dataBtn = document.querySelector('#dataBtn')
-        let dataArray = containerData
-        dataArray.split(" ")
+        const d = new Date()
+        let anoAtual = d.getFullYear()
+        let mesAtual = d.getMonth() +1
+        let dias = 0, mes = 0 , ano = 0, diasDeVida = 0
 
-        dataBtn = addEventListener('click', () => {
-            console.log(typeof dataArray)
+        dataBtn.addEventListener('click', () => {
+            let containerData = document.querySelector('#caixa').value
+            let dataArray = containerData.split("/")
 
-            dataArray.forEach((numero) => 
-            console.log(`debug pra ver se aparecer / foreach : ${numero}`)
-        )
+            dataArray.forEach((numero, index) => {
+                if(index === 0){
+                    dias = numero
+                    console.log( `debug valor dia: ${dias}`)
+                }    
+                else if(index === 1) { 
+                    mes = (mesAtual - numero) * 30
+                    if (mes < 0) mes = mes * -1
+                    if (mes === 0) mes = 30
+                    console.log( `debug valor mes: ${mes}`)
+                }else if(index === 2){
+                    ano = (anoAtual - numero) * 365
+                    if (ano < 0) ano = ano * -1
+                    console.log( `debug valor ano: ${ano}`)
+
+                }
+            })
+            diasDeVida = Number(dias) + Number(mes) + Number(ano)
+            console.log( `Dias de vida: ${diasDeVida}`)
+
+            let efemer = document.createElement('p')
+            efemer.innerText = `dias de vida: ${diasDeVida}`
+            let corpo = document.querySelector('body')
+            corpo.appendChild(efemer)
+            })
+        
+    //Q7  7. Faça um programa que leia uma data de nascimento em formato de dd/mm/aaaa e escreva por extenso a 
+//data. Por exemplo: 03/05/2017 vira "03 de maio de 2017".
+
+        let dataExtBtn = document.querySelector('#dataExtBtn')
+        
+        dataExtBtn.addEventListener('click', () => {
+            const months = ["Janeiro", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+            let containerData = document.querySelector('#caixa').value
+            let dataArray = new Date(containerData)
+            let mes = months[dataArray.getMonth()]
+           
+            //ja funcional, mas precisa manipular a DOM e, se quiser, converter a entrada do usuário para MM/DD/YYYY para que o valor saia na data brasileira
         })
+        
+    //Q8 Faça um programa que leia duas datas e indique em semanas a distância entre elas. Por exemplo: 
+    //02/05/2017 e 02/07/2017 resultado = 8 semanas.
+    let difDataBtn = document.querySelector('#difDataBtn')
+
+        difDataBtn.addEventListener('click', () => {
+            let containerData = document.querySelector('#caixa').value
+            let dataArray = containerData.split("/")
+            console.log(`debug dataarray : ${dataArray}`)
+            dataArray.forEach((numero, index) => {
+                if(index === 0){
+                    dias = numero
+                    console.log( `debug valor dia: ${dias}`)
+                }    
+                else if(index === 1) { 
+                    mes = (mesAtual - numero) * 30
+                    if (mes < 0) mes = mes * -1
+                    if (mes === 0) mes = 30
+                    console.log( `debug valor mes: ${mes}`)
+                }else if(index === 2){
+                    ano = (anoAtual - numero) * 365
+                    if (ano < 0) ano = ano * -1
+                    console.log( `debug valor ano: ${ano}`)
+
+                }
+            })
+        })
+            diasDeVida = Number(dias) + Number(mes) + Number(ano)
+
 
     </script>
 </body>
