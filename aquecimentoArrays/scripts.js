@@ -13,6 +13,9 @@ const inventors = [
     { first: 'Lise', last: 'Meitner', year: 1878, passed: 1968 },
     { first: 'Hanna', last: 'Hammarström', year: 1829, passed: 1909 }
 ];
+
+
+
 const people = [`Bernhard, Sandra`, `Bethea, Erin`, `Becker, Carl`, `Bentsen, Lloyd`,
     `Beckett, Samuel`, `Blake, William`, `Berger, Ric`, `Beddoes, Mick`, `Beethoven, 
    Ludwig`, `Belloc, Hilaire`, `Begin, Menachem`, `Bellow, Saul`, `Benchley, Robert`,
@@ -31,9 +34,38 @@ let inventorsNames = inventors.map((obj) => { return { ["first"]: obj.first, ["l
 )
 
 //Q3
-let sortedByYear = inventors.sort((a,b) => a.year - b.year) //sort itera sobre dois valores dentro do array de uma vez, retornando negativo ele troca (a vem antes) positivo (b antes)
+let sortedByYear = inventors.sort((a, b) => a.year - b.year) //sort itera sobre dois valores dentro do array de uma vez, retornando negativo ele troca (a vem antes) positivo (b antes)
 
 //Q4
+//encontrar o ano de nascimento mais recente e o ano de falecimento mais antigo
+//e armazenar em duas variáveis
+//calcular a diferença entre o ano de falecimento mais antigo e o ano de nascimento mais recente
+//retornar o valor dessa diferença
+
+let recBorn = inventors
+recBorn.sort((a, b) => a.year - b.year) //passar a chave para os argumentos da callbackFn do sort, sempre, para q n itere sobre o array inteiro
+//console.log(recBorn)
+
+
+let olderDeath = inventors
+olderDeath.sort((a, b) => a.passed - b.passed)
+let result = (olderDeath[olderDeath.length - 1].passed) - (recBorn[recBorn.length - 1].year) //acessar o indice.key
+//console.log(`Todos os inventores ficaram juntos por ${result} anos.`); 
+
+//Q5
+
+inventors.sort((a,b) => (a.year - a.passed) - (b.year - b.passed)) //primeiro, ordena
+let inventorsV2 = inventors.forEach((obj) => obj.yearsAlive = obj.passed - obj.year) //itera sobre cada objeto e adiciona uma chave nova com valor de anos vivos (pra visualizar se tá correto)
+
+//Q6
+//usar sort pra comparar por ordem alfabética
+//com o array organizado, usar sort para verificar se são iguais, se sim, cortar com pop ou shift
+
+let data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 
+'walk', 'car', 'van', 'car', 'truck']
+
+dataUnique = new Set (data) //set é uma estrutura de dados, como uma classe em js, por isso precisa ser instanciado com um construtor, porque tem métodos dentro dele
+console.log(dataUnique)
 
 /*1. Faça uma função que filtre a lista de inventores para aqueles que nasceram de 1500 a 1599.
 2. Faça uma função que retorne um array com os primeiros e últimos nomes dos inventores.
@@ -42,5 +74,5 @@ novo.
 4. Faça uma função que identifique por quantos anos todos os inventores estiveram vivos juntos.
 5. Faça uma função que ordene os inventores pelos anos vividos.
 6. Crie uma função que remova as redundâncias na lista abaixo:
-const data = [`car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 
-'walk', 'car', 'van', 'car', 'truck']*/
+const data = [`car`, `car`, `truck`, `truck`, `bike`, `walk`, `car`, `van`, `bike`, 
+`walk`, `car`, `van`, `car`, `truck`] */
