@@ -17,6 +17,7 @@
         <button type="button" id="dataBtn">Dias de vida</button>
         <button type="button" id="dataExtBtn">Data por extenso</button>
         <button type="button" id="difDataBtn">Diferença entre datas</button>
+        <button type="button" id="criptoBtn">Criptografar frase</button>
     </div>
     <div>
         <label for="searchBox"></label>
@@ -313,9 +314,41 @@
 
                 }
             })
-        })
             diasDeVida = Number(dias) + Number(mes) + Number(ano)
 
+
+        })
+
+        //Q10
+        criptoBtn = document.querySelector('#criptoBtn')
+        //criar objeto
+        const mapeamento = {
+            'T': 'P', 'P': 'T',
+            'E': 'O', 'O': 'E',
+            'N': 'L', 'L': 'N',
+            'I': 'A', 'A': 'I',
+            'S': 'R', 'R': 'S',
+        }
+        //percorrer os caracteres da frase e caso ela seja uma chave, trocar pelo valor dessa chave
+        criptoBtn.addEventListener('click', () => {
+        let fraseCripto = document.querySelector('#caixa').value
+            fraseCripto = fraseCripto.split("")
+
+            fraseCripto.forEach((letra, indice) => {
+                if(Object.keys(mapeamento).includes(letra)){
+                    fraseCripto[indice] = mapeamento[letra]
+                }
+            })
+
+            fraseCripto = fraseCripto.join("")
+            console.log(`debug finalfrasecripto: ${fraseCripto}`)
+
+            let pzinho = document.createElement('p')
+            pzinho.innerHTML = fraseCripto
+            let corpo = document.querySelector('body')
+            corpo.appendChild(pzinho)
+        })
+        
 
     </script>
 </body>
