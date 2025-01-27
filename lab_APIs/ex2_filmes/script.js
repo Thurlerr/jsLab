@@ -9,7 +9,8 @@
 // (2 Pontos)
 let teste = "breaking+bad"
 let arrayFilmes = []
-
+let listaTratada = []
+let listaTratada2 = []
 function pesquisarTitulo (titulo){
     let xhr = new XMLHttpRequest()
     
@@ -18,18 +19,25 @@ function pesquisarTitulo (titulo){
     
     xhr.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200 ){
-            let apiData = this.responseText // apidata segura os dados de retorno
-            console.log(apiData)
-           let arr = JSON.parse(apiData)
-           arrayFilmes.push(arr.Title)
+            arrayFilmes = this.responseText // arrayFilmes segura os dados de retorno
+            console.log(arrayFilmes)
+            arrayFilmes = JSON.parse(arrayFilmes)
+            console.log(`debug pós json.parse${arrayFilmes}`)
+
+            listaTratada = Object.keys(arrayFilmes).forEach((key) => { 
+                if (key === "Title" || key === "Year" || key === "Director"){
+                    //(arrayFilmes[key] === arrayFilmes.Title || arrayFilmes[key] === arrayFilmes.Year || arrayFilmes[key] === arrayFilmes.Director)
+                    listaTratada2.push(arrayFilmes[key]) //gambiarra
+                } 
+                
+            })
         }
     }
+    //move pro escopode  onreadystatechange caso n funcione
 }
 
 pesquisarTitulo(teste)
 
-//boilerplate ; wrappar esta porra toda em uma função
-//função que retorna para um array objetodaAPI.filme (provavelmente via addeventlistener)
 
 
 //http://www.omdbapi.com/?apikey=4f4a6651& colocar colchetes entre a api se n funfar
