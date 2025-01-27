@@ -17,3 +17,18 @@ alguns dos atributos de filme/série são arrays, que precisarão também ser it
 8. Desafio: altere a cor da faixa etária de acordo com os valores: verde: de 0 a 14 anos; 
 amarelo acima de 14 e menor que 18; vermelho: maior que 18 anos;
 9. Desafio 2: represente a classificação (rating) de cada filme/série com estrela */
+
+import dadosFilmes from './filmes.json'
+
+console.log(dadosFilmes)
+
+// Função para preencher a ficha de apresentação
+// function preencherFicha(filme) {
+//   const ficha = document.querySelector('.ficha');
+//   ficha.querySelector('.titulo').textContent = filme.titulo;
+//   ficha.querySelector('.resumo').textContent = filme.resumo;
+//   ficha.querySelector('.figura').src = filme.figura;
+//   ficha.querySelector('.faixa-etaria').textContent = filme.faixaEtaria;
+//   ficha.querySelector('.generos').textContent = filme.generos.join(', ');
+//   ficha.querySelector('.elenco').textContent = filme.elenco.join(', ');
+//   ficha.querySelector('.opinioes').textContent = filme.opinioes.join(', ');

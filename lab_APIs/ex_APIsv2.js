@@ -70,6 +70,3 @@ btn2.addEventListener('click', () => {
     }
 })
 
-
-//criar objeto xhr.conversion_rates com as taxas de cambio
-/*Armazene as taxas de câmbio em um objeto e use .map() para calcular o valor em várias moedas de uma só vez.*/
