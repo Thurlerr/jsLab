@@ -7,11 +7,17 @@
 
 // Envie a URL para o site funcionando com a resposta
 // (2 Pontos)
-let teste = "breaking+bad"
+let btn = document.querySelector('#search')
+btn.addEventListener('click', () => {
+    // Captura o valor do input sempre que o botão for clicado
+    let entrada = document.querySelector('#userInput').value;
+    entrada = entrada.replaceAll(" ", "+");
+    pesquisarTitulo(entrada);
+});
+
 let arrayFilmes = []
-let listaTratada = []
-let listaTratada2 = []
-function pesquisarTitulo (titulo){
+
+function pesquisarTitulo(titulo) {
     let xhr = new XMLHttpRequest()
     
     xhr.open("GET", `https://www.omdbapi.com/?apikey=4f4a6651&t=${titulo}`) //tratar a futura variável para adicionar + nos espaços brancos
@@ -20,26 +26,30 @@ function pesquisarTitulo (titulo){
     xhr.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200 ){
             arrayFilmes = this.responseText // arrayFilmes segura os dados de retorno
-            console.log(arrayFilmes)
-            arrayFilmes = JSON.parse(arrayFilmes)
-            console.log(`debug pós json.parse${arrayFilmes}`)
+            console.log(arrayFilmes) //mostra os dados da api pra ver se deu merda
+            arrayFilmes = JSON.parse(arrayFilmes) //passa o json pra objeto js
 
-            listaTratada = Object.keys(arrayFilmes).forEach((key) => { 
+            let listaTratada2 = []
+            Object.keys(arrayFilmes).forEach((key) => { 
                 if (key === "Title" || key === "Year" || key === "Director"){
-                    //(arrayFilmes[key] === arrayFilmes.Title || arrayFilmes[key] === arrayFilmes.Year || arrayFilmes[key] === arrayFilmes.Director)
                     listaTratada2.push(arrayFilmes[key]) //gambiarra
                 } 
                 
             })
+            let enfiarNaDom = `Titulo: ${listaTratada2[0]} 
+            Ano: ${listaTratada2[1]}
+            Diretor: ${listaTratada2[2]}` //ok!
+            
+            let p = document.createElement('p')
+            let corpo = document.querySelector('body')
+            p.textContent = enfiarNaDom
+            corpo.appendChild(p)
         }
     }
-    //move pro escopode  onreadystatechange caso n funcione
 }
-
-pesquisarTitulo(teste)
 
 
 
 //http://www.omdbapi.com/?apikey=4f4a6651& colocar colchetes entre a api se n funfar
 
-//http:www.omdbapi.com/?apikey=4f4a6651&t=breaking+bad pronto
+//http:www.omdbapi.com/?apikey=4f4a6651&t=breaking+bad pronto */
